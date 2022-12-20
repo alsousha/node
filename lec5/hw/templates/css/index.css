@@ -1,0 +1,101 @@
+html{
+    box-sizing: border-box;
+    font-size: 62.5%;
+    background-color: lightblue;
+}
+body{
+    font-size: 2rem;
+}
+h1{
+    text-align: center;
+    color: rgba(41, 14, 150, 0.972);
+    font-size: 6rem;
+}
+.h2{
+    text-align: center;
+    color: rgba(41, 14, 150, 0.972);
+    font-size: 4rem;
+    font-weight: 600;
+}
+.lorem{
+    
+    font-size: small;
+    
+}
+.autor{
+    
+    font-size: 3rem;
+    
+}
+
+.black{
+    background-color: black;
+    color: white;
+    font-size: 2rem;
+    margin-left: 2rem; ;
+    margin-right: 45rem;
+    text-align: center;
+    position: absolute;
+    padding: 0.5rem 1.5rem;
+    text-transform: uppercase;
+    left: 0;
+}
+
+.white{
+    background-color: white;
+    font-size: 9rem;
+   
+}
+
+.yellow{
+    background-color: yellow;
+    font-size: 30rem;
+    
+}
+.mid{
+    background-color: lightgray;
+
+    
+}
+.rel{
+    position: relative;
+}
+.reverse{
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+}
+.reverse::after{
+    content: "Lorem ipsum dolor sit";
+    transform: rotate(270deg) translateX(89%) translateY(-5px);
+    position: absolute;
+    font-size: 2rem;
+    width: 130%;
+    color: yellow;
+    left: 0;
+    white-space: nowrap;
+    bottom: 0;
+
+}
+.absolute{
+    font-size: 2rem;
+}
+.p04{
+    padding: 0 4rem;
+}
+.pt2{
+    padding-top: 2rem;
+}
+.main{
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: right;
+    
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.botton-text{
+    max-width: 100rem;
+}

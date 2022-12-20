@@ -1,0 +1,1 @@
+console.log(module); //info about current module
