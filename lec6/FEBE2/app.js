@@ -1,4 +1,6 @@
 "use strict";
+//Bogdanov Alsu 333988939
+//Barak Tsach 300096245
 const fs = require("fs");
 const path = require("path");
 const url = require("url");

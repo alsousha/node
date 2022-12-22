@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submitting JSON Data</title>
+
+</head>
+
+<body>
+  <h1>Submitting JSON Data</h1>
+  <div></div>
+
+  <script>
+    const data = [
+      {
+        name: 'Yuval',
+        age: 20,
+      },
+
+      {
+        name: 'Rina',
+        age: 45,
+      },
+
+      {
+        name: 'Hen',
+        age: 25,
+      },
+    ];
+
+    fetch( 'message', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify( data ),
+    } ).then( res => res.json() )
+      .then( res => {
+        console.log( res );
+        const lis = res.map( el => {
+          return `
+            <li>${el.name} - ${el.age}</li>
+          `;
+        } );
+        
+
+        document.querySelector( 'div' ).innerHTML = `
+        <ol>${lis.join( '' ) }</ol>
+        `;
+      } );
+
+  </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

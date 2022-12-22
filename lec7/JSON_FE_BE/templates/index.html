@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/css/style.css"> 
+  <title>Submitting JSON Data</title>
+
+</head>
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!
+<body>
+  <h1>Submitting JSON Data</h1>
+  <div></div>
+  
+
+  <script>
+    const data = [
+      {
+        name: 'Yuval',
+        text: 'Lorem ipsum dolor sit amet.',
+		img: '1.png'
+      },
+
+      {
+        name: 'Rina',
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!',
+		img: '2.png'
+      },
+
+      {
+        name: 'Hen',
+        text: 'Lorem ipsum dolor sit amet consectet',
+		img: '3.png'
+      },
+    ];
+
+    fetch( 'message', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify( data ),
+    } ).then( res => res.json() )
+      .then( res => {
+        console.log( res );
+        const lis = res.map( el => {
+          return `
+		  <li>
+			<img src="../assets/img/${el.img}" alt="">
+			<div>${el.name}</div>
+			<p>${el.text}</p>
+	      </li>
+            
+          `;
+        } );
+        
+
+        document.querySelector( 'div' ).innerHTML = `
+        <ol>${lis.join( '' ) }</ol>
+        `;
+      } );
+
+  </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
