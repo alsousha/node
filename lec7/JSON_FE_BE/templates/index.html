@@ -21,19 +21,24 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!
       {
         name: 'Yuval',
         text: 'Lorem ipsum dolor sit amet.',
-		img: '1.png'
+		img: '1.jpg'
       },
 
       {
         name: 'Rina',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!',
-		img: '2.png'
+		img: '2.jpg'
       },
 
       {
         name: 'Hen',
         text: 'Lorem ipsum dolor sit amet consectet',
-		img: '3.png'
+		img: '3.jpg'
+      },
+	  {
+        name: 'Hen',
+        text: 'Lorem ipsum dolor sit amet consectet',
+		img: '5.png'
       },
     ];
 
@@ -51,7 +56,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!
         const lis = res.map( el => {
           return `
 		  <li>
-			<img src="../assets/img/${el.img}" alt="">
+			<img src="${el.img}" alt="sdf">
 			<div>${el.name}</div>
 			<p>${el.text}</p>
 	      </li>
@@ -65,15 +70,8 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!
         `;
       } );
 
+
   </script>
-
-
-
-
-
-
-
-
 </body>
 
 </html>
