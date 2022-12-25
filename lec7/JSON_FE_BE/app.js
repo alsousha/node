@@ -5,10 +5,8 @@ const fs = require("fs");
 const url = require("url");
 const path = require("path");
 
-// home page
-const home = fs.readFileSync(`${__dirname}/templates/index.html`);
-const imgDir = path.join(__dirname, "/assets/img");
-var mime = {
+//type of headers
+let mime = {
   html: "text/html",
   txt: "text/plain",
   css: "text/css",
@@ -22,19 +20,19 @@ var mime = {
 const server = http.createServer((req, res) => {
   let pathName = req.url;
   const pathUrl = url.parse(pathName, true);
-  var reqpath = pathName.toString().split("?")[0];
+  let reqpath = pathName.toString().split("?")[0];
   //console.log("reqpath" + reqpath);
   pathName = pathUrl.pathname;
 
   //?????
-  var file = path.join(
+  let file = path.join(
     __dirname,
     reqpath.replace(/\/$/, "/templates/index.html")
   );
   //???
   //console.log("file" + file);
 
-  var type = mime[path.extname(file).slice(1)] || "text/plain";
+  let type = mime[path.extname(file).slice(1)] || "text/plain";
   if (reqpath === "/message") {
     const body = [];
     req.on("data", (chunk) => {
@@ -57,7 +55,7 @@ const server = http.createServer((req, res) => {
       }
     });
   } else {
-    var s = fs.createReadStream(file);
+    let s = fs.createReadStream(file);
     s.on("open", function () {
       res.setHeader("Content-Type", type);
       s.pipe(res);
