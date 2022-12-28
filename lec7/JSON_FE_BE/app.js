@@ -1,4 +1,6 @@
 "use strict";
+//Bogdanov Alsu 333988939
+//Barak Tsach 300096245
 
 const http = require("http");
 const fs = require("fs");
@@ -21,16 +23,16 @@ const server = http.createServer((req, res) => {
   let pathName = req.url;
   const pathUrl = url.parse(pathName, true);
   let reqpath = pathName.toString().split("?")[0];
-  //console.log("reqpath" + reqpath);
+  console.log("reqpath" + reqpath);
   pathName = pathUrl.pathname;
 
-  //?????
+  //
   let file = path.join(
     __dirname,
     reqpath.replace(/\/$/, "/templates/index.html")
   );
-  //???
-  //console.log("file" + file);
+  //
+  console.log("file" + file);
 
   let type = mime[path.extname(file).slice(1)] || "text/plain";
   if (reqpath === "/message") {
