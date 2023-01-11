@@ -1,0 +1,88 @@
+/* #region general */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+
+}
+
+:root {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 2rem;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	line-height: 1.5;
+	height: 100vh;
+	background-color: aliceblue;
+}
+
+/* #endregion: general */
+
+/* #region typography */
+
+h1,
+h2 {
+	font-weight: 800;
+	font-size: 3.2rem;
+	font-family: 'Goblin One', cursive;
+}
+
+h1 {
+	
+	font-size: 4.5rem;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 0; /* normalize defines margin on h1 */
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}
+/* #endregion typography */
+/* #region spaces*/
+.container{
+	max-width: 80rem;
+	margin: 0 auto;
+}
+.d-flex{
+	display: flex;
+}
+.jcsb{
+	justify-content: space-between;
+}
+.jcc{
+	justify-content: center;
+}
+.aic{
+	align-items: center;
+}
+.f-column{
+	flex-direction: column;
+}
+.f-wrap{
+	flex-wrap: wrap;
+}
+.h40{
+	height: 40rem;
+}
+.w_50{
+	width: calc(100%/2 - 10px);
+}
+.mt6{
+	margin-top: 6rem;
+}
+.mb5{
+	margin-bottom: 5rem;
+}
+/* #endregion spaces*/
+.accent{
+	color: blueviolet;
+}
