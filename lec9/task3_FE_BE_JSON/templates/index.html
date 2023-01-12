@@ -7,18 +7,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../assets/css/style.css"> 
+  <script defer src="../assets/js/main.js"></script>
   <title>Task3 JSON Data</title>
 
 </head>
 <body>
 	<header>
-		<div class="container">
-			<a href="home.html">Home</a>
-			<a href="form.html">Form</a>
+		<div class="container header__wrap d-flex g2 pt3">
+			<a href="/">Home</a>
+			<a href="templates/form.html">Form</a>
 		</div>
-		
 	</header>
-  <h1 class="accent">HomePage</h1>
+  <h1 class="accent">Home Page</h1>
   <div class="container mt6">
 
 
@@ -26,61 +26,7 @@
 
   
   <script>
-    const data = [
-      {
-        name: 'By Yuval Dummy',
-        text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas asperiores maiores, beatae consequuntur, eligendi quasi, possimus sunt nihil id minus voluptatibus perferendis. Quo maxime eos praesentium doloremque ab aut consectetur?',
-        img: '1.jpg'
-      },
 
-      {
-        name: 'By Rina Collen',
-        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, autem!',
-        img: '2.jpg'
-      },
-
-      {
-        name: 'By Hen Rummy',
-        text: 'Lorem ipsum dolor sit amet consectet',
-        img: '3.jpg'
-      },
-      {
-          name: 'By Kelly Fythom',
-          text: 'Lorem ipsum dolor sit amet consectet',
-          img: '5.png'
-      },
-    ];
-
-    fetch( 'message', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      },
-
-      body: JSON.stringify( data ),
-    } ).then( res => res.json() )
-      .then( res => {
-        console.log( res );
-        const lis = res.map( el => {
-          return `
-		  <li class="w_50 mb5">
-        <a href="#" class="d-flex jcc aic f-column">
-          
-          <img src="${el.img}" class="mid__book h40" alt="book">
-          <div class="top__book"><h2 class="accent">${el.name}</h2></div>
-          <div class="bottom__bool"><p>${el.text}</p></div>
-        </a>
-	    </li>
-            
-          `;
-        } );
-        
-
-        document.querySelector( 'div' ).innerHTML = `
-        <ul class="d-flex jcsb f-wrap">${lis.join( '' ) }</ul>
-        `;
-      } );
 
 
   </script>

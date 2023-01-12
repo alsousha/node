@@ -5,7 +5,7 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
-const path = require("path");
+const path = require("path"); 
 
 //type of headers
 let mime = {
@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
   let pathName = req.url;
   const pathUrl = url.parse(pathName, true);
   let reqpath = pathName.toString().split("?")[0];
-  console.log("reqpath" + reqpath);
+  //console.log("reqpath" + reqpath);
   pathName = pathUrl.pathname;
 
   //
@@ -32,31 +32,31 @@ const server = http.createServer((req, res) => {
     reqpath.replace(/\/$/, "/templates/index.html")
   );
   //
-  console.log("file" + file);
+  //console.log("file" + file);
 
   let type = mime[path.extname(file).slice(1)] || "text/plain";
-  if (reqpath === "/message") {
-    const body = [];
-    req.on("data", (chunk) => {
-      body.push(chunk);
-    });
-    req.on("end", () => {
-      try {
-        console.log("No more data");
-        const obj = JSON.parse(body); //object from JSON
-        //add dirs path to img file from FE
-        obj.map(function (item) {
-          let tmpName = item.img;
-          item.img = "assets/img/" + tmpName;
-        });
+  // form method
+  const method = req.method;
 
+  if (pathName === '/templates/formReq') {
+    
+    if (method === 'POST') {
+      console.log('!!!!!!!!!No more data2');
+      const body = [];
+      let obj={}
+      req.on('data', chunk => {
+        //console.log(chunk);//<Buffer 6d 65 73 73 61 67 65 …>
+        body.push(chunk); 
+      });
+      req.on('end', () => {
+        //const parsedBody = Buffer.concat(body).toString(); //userName=aa&userLastName=a&userPhone=22
+    
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(obj));
-      } catch (error) {
-        console.error(error.message);
-      }
-    });
-  } else {
+        res.end(JSON.stringify(obj)); 
+
+      });
+    }
+  }else {
     let s = fs.createReadStream(file);
     s.on("open", function () {
       res.setHeader("Content-Type", type);

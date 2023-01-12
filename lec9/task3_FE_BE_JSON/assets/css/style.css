@@ -70,11 +70,17 @@ a{
 .f-wrap{
 	flex-wrap: wrap;
 }
+.g2{
+	gap: 2rem;
+}
 .h40{
 	height: 40rem;
 }
 .w_50{
 	width: calc(100%/2 - 10px);
+}
+.mt2{
+	margin-top: 2rem;
 }
 .mt6{
 	margin-top: 6rem;
@@ -82,7 +88,41 @@ a{
 .mb5{
 	margin-bottom: 5rem;
 }
+.pt3{
+	padding-top: 3rem;
+}
 /* #endregion spaces*/
 .accent{
 	color: blueviolet;
+}
+.header__wrap a{
+	padding: 1rem;
+	border: 1px solid blueviolet;
+}
+.header__wrap a:hover{
+	background-color: blueviolet;
+	transition: all .3s;
+}
+.form__wrap input{
+	width: calc(100%/2 - 10px);
+    border: 1px blueviolet;
+    margin-top: 1rem;
+	padding: 1rem;
+    font-size: 2rem;
+    border-radius: 1rem
+}
+.form__wrap input[type="submit"] {
+	background-color: blueviolet;
+	cursor: pointer;
+}
+.form__wrap input[type="submit"]:hover{
+	background-color: transparent;
+	border: 1px solid blueviolet;
+	transition: all .3s;
+}
+.success{
+	color: green;
+}
+.fail{
+	color: red;
 }

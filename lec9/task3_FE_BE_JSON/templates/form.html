@@ -4,25 +4,32 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<script defer src="../assets/js/main.js"></script>
 	<title>Form</title>
 </head>
 <body>
 	<header>
-		<div class="container">
-			<a href="home.html">Home</a>
-			<a href="form.html">Form</a>
+		<div class="container header__wrap d-flex g2 pt3">
+			<a href="/">Home</a>
+			<a href="templates/form.html">Form</a>
 		</div>
-		
 	</header>
-	<form method="post">
-		<label for="userName">Name</label>
-		<input type="text" id="userName">
-		<label for="userLastName">LastName</label>
-		<input type="text" id="userLastName">
-		<label for="userPhone">Phone</label>
-		<input type="text" id="userPhone">
-		<input type="submit" value="Send">
-	</form>
+	<h1 class="accent">Form page</h1>
+	<div class="container form__wrap">
+		<form action="formReq2" method="post" class="d-flex jcsb f-wrap">
+			<input type="text" name="userName" id="userName" placeholder="Name:">
+			<input type="text" name="userLastName" id="userLastName" placeholder="Lastname:">
+			<input type="text" name="userPhone" id="userPhone" placeholder="Phone:">
+			
+			<input type="submit" value="Send" id="BtnForm">
+		</form>
+		<div class="response mt2"></div>
+	</div>
 	
+	
+
+	
+	<!--  -->
 </body>
 </html>
