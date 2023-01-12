@@ -1,0 +1,18 @@
+{
+  "name": "lec9",
+  "version": "1.0.0",
+  "description": "test application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "debug"
+  },
+  "keywords": [
+    "Alsu"
+  ],
+  "author": "ALsu",
+  "license": "ISC"
+}
