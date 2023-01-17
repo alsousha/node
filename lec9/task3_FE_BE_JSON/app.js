@@ -5,7 +5,7 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
-const path = require("path"); 
+const path = require("path");
 
 //type of headers
 let mime = {
@@ -38,25 +38,22 @@ const server = http.createServer((req, res) => {
   // form method
   const method = req.method;
 
-  if (pathName === '/templates/formReq') {
-    
-    if (method === 'POST') {
-      console.log('!!!!!!!!!No more data2');
+  if (pathName === "/templates/formReq") {
+    if (method === "POST") {
       const body = [];
-      let obj={}
-      req.on('data', chunk => {
+      let obj = {};
+      req.on("data", (chunk) => {
         //console.log(chunk);//<Buffer 6d 65 73 73 61 67 65 …>
-        body.push(chunk); 
+        body.push(chunk);
       });
-      req.on('end', () => {
-        //const parsedBody = Buffer.concat(body).toString(); //userName=aa&userLastName=a&userPhone=22
-    
+      req.on("end", () => {
+        const parsedBody = Buffer.concat(body).toString(); //userName=aa&userLastName=a&userPhone=22
+        console.log(parseBody);
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(obj)); 
-
+        res.end(JSON.stringify(obj));
       });
     }
-  }else {
+  } else {
     let s = fs.createReadStream(file);
     s.on("open", function () {
       res.setHeader("Content-Type", type);
