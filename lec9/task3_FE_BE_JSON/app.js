@@ -48,7 +48,7 @@ const server = http.createServer((req, res) => {
       });
       req.on("end", () => {
         const parsedBody = Buffer.concat(body).toString(); //userName=aa&userLastName=a&userPhone=22
-        console.log(parseBody);
+        console.log(parsedBody);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(obj));
       });
