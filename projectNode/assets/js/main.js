@@ -1,23 +1,10 @@
 "use strict";
 
-// const check = require("./check");
-// let val = check.hello();
-// console.log(val);
 import * as check from "./check.js";
 
-// const greet_scaler = greet("Scaler");
-
-// console.log(greet_scaler); // Hello, Scaler
-// console.log(message); // How you doing?
-
-/////////////////
-
-// const greet = require("./check");
-// greet();
-// const greet = require("./check");
-///////////
 const btn_form = document.getElementById("BtnForm");
 const btn_login = document.getElementById("BtnLogin");
+const add_student = document.getElementById("addStudent");
 
 let textResponse;
 if (btn_form != null) {
@@ -69,8 +56,10 @@ if (btn_login != null) {
       username: username.value.trim(),
       password: password.value.trim(),
     };
-    if(check.checkLoginValue(textResponse, dataUser.username, dataUser.password)){
-      //send data to server      
+    if (
+      check.checkLoginValue(textResponse, dataUser.username, dataUser.password)
+    ) {
+      //send data to server
       fetch("login", {
         method: "POST",
         headers: {
@@ -83,11 +72,66 @@ if (btn_login != null) {
           return res.json();
         })
         .then((res) => {
-          textResponse = "Login success!";
-          check.printResponse(".response", textResponse, "success");
+          if (res.isUserExist) {
+            textResponse = "Login success!";
+            check.printResponse(".response", textResponse, "success");
+            window.location.href = "templates/main.html"; //redirect to main page
+          } else {
+            textResponse = "Incorrect username or password! Try again";
+            check.printResponse(".response", textResponse, "fail");
+          }
         })
         .catch((err) => {
-          textResponse = "Incorrect username or password! Try again";
+          textResponse = "Uuups. we have some problem with server. Try latter!";
+          check.printResponse(".response", textResponse, "fail");
+          console.log(err);
+        });
+    }
+  });
+}
+if (add_student != null) {
+  add_student.addEventListener("click", function (event) {
+    event.preventDefault();
+    //get inputs
+    const studentName = document.querySelector("#studentName");
+    const studentLastName = document.querySelector("#studentLastName");
+    const studentPhone = document.querySelector("#studentPhone");
+
+    const studentUser = {
+      studentName: studentName.value.trim(),
+      studentLastName: studentLastName.value.trim(),
+      studentPhone: studentPhone.value.trim(),
+    };
+    if (
+      check.checkStudentValue(
+        studentUser.studentName,
+        studentUser.studentLastName,
+        studentUser.studentPhone
+      )
+    ) {
+      //send data to server
+      fetch("addStudent", {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(studentUser), //send data
+      })
+        .then(function (res) {
+          return res.json();
+        })
+        .then((res) => {
+          if (res.isAddSuccess) {
+            textResponse = "Addeding success!";
+            check.printResponse(".response", textResponse, "success");
+          } else {
+            textResponse = "Incorrect data of student! Try again";
+            check.printResponse(".response", textResponse, "fail");
+          }
+        })
+        .catch((err) => {
+          textResponse = "Uuups. we have some problem with server. Try latter!";
           check.printResponse(".response", textResponse, "fail");
           console.log(err);
         });

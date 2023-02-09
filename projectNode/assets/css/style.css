@@ -49,7 +49,7 @@ a{
 /* #endregion typography */
 /* #region spaces*/
 .container{
-	max-width: 80rem;
+	max-width: 120rem;
 	margin: 0 auto;
 }
 .d-flex{
@@ -104,7 +104,7 @@ a{
 	transition: all .3s;
 }
 .form__wrap input{
-	width: calc(100%/2 - 10px);
+	width: calc(100%/4 - 10px);
     border: 1px blueviolet;
     margin-top: 1rem;
 	padding: 1rem;

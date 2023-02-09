@@ -1,8 +1,7 @@
-
 export const checkLoginValue = function (textResponse, username, password) {
   //add checks for login and password !!!
   return checkInputsNotEmpty(username, password, textResponse);
-}
+};
 
 function checkFormValue(dataUsers) {
   checkInputsNotEmpty(dataUsers.name, dataUsers.lastName, dataUsers.phone);
@@ -36,20 +35,24 @@ export const checkInputsNotEmpty = function (textResponse, ...values) {
     }
   }
   return true;
-}
+};
 
 export const checkPhone = function (str) {
   return str.length === 8 && Number.isInteger(Number(str)) && /^\d+$/.test(str);
-}
+};
 
 export const checkStr = function (str) {
   return /^[a-zA-Z]+$/.test(str);
-}
+};
 export const printResponse = function (parentElem, text, className) {
   document.querySelector(parentElem).innerHTML = `
     <span class="${className}">${text}</span>
     `;
-}
+};
 export const checkNotNullInput = function (inputElem) {
   return inputElem.value;
-}
+};
+export const checkStudentValue = function () {
+  //write check func!!!
+  return true;
+};
