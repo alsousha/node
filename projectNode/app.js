@@ -55,7 +55,9 @@ const server = http.createServer((req, res) => {
       });
     }
   } else if (pathName === "/login") {
-    console.log("Sdf");
+
+    let data = fs.readFileSync(__dirname +'/assets/data/users.json')
+    console.log(data);
   } else {
     let s = fs.createReadStream(file);
     s.on("open", function () {
