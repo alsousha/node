@@ -1,7 +1,6 @@
 "use strict";
 
 import * as check from "./check.js";
-
 const btn_form = document.getElementById("BtnForm");
 const btn_login = document.getElementById("BtnLogin");
 const add_student = document.getElementById("addStudent");
@@ -95,18 +94,18 @@ if (add_student != null) {
     //get inputs
     const studentName = document.querySelector("#studentName");
     const studentLastName = document.querySelector("#studentLastName");
-    const studentPhone = document.querySelector("#studentPhone");
+    const studentAge = document.querySelector("#studentAge");
 
     const studentUser = {
       studentName: studentName.value.trim(),
       studentLastName: studentLastName.value.trim(),
-      studentPhone: studentPhone.value.trim(),
+      studentPhone: studentAge.value.trim(),
     };
     if (
       check.checkStudentValue(
         studentUser.studentName,
         studentUser.studentLastName,
-        studentUser.studentPhone
+        studentUser.studentAge
       )
     ) {
       //send data to server
@@ -122,11 +121,20 @@ if (add_student != null) {
           return res.json();
         })
         .then((res) => {
-          if (res.isAddSuccess) {
+          if (res[0].isAddSuccess) {
             textResponse = "Addeding success!";
             check.printResponse(".response", textResponse, "success");
+            const lis = res.map((el) => {
+              return `
+				  <li><div class="student">${el.name}-${el.lastname}-${el.age}</div></li>
+				`;
+            });
+
+            document.querySelector(".students__wrap").innerHTML = `
+			  <ol>${lis.join("")}</ol>
+			  `;
           } else {
-            textResponse = "Incorrect data of student! Try again";
+            textResponse = "Incorrect data of student! Try again!";
             check.printResponse(".response", textResponse, "fail");
           }
         })

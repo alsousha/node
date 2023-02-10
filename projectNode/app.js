@@ -6,7 +6,8 @@ const http = require("http");
 const fs = require("fs");
 const url = require("url");
 const path = require("path");
-
+const sFunc = require("./server_functions.js");
+let isUserAuth = false;
 //type of headers
 let mime = {
   html: "text/html",
@@ -23,18 +24,12 @@ const server = http.createServer((req, res) => {
   let pathName = req.url;
   const pathUrl = url.parse(pathName, true);
   let reqpath = pathName.toString().split("?")[0];
-  //console.log("reqpath" + reqpath);
   pathName = pathUrl.pathname;
-  console.log();
 
-  //
   let file = path.join(
     __dirname,
     reqpath.replace(/\/$/, "/templates/index.html")
   );
-  //
-  //console.log("file" + file);
-
   let type = mime[path.extname(file).slice(1)] || "text/plain";
   // form method
   const method = req.method;
@@ -67,8 +62,12 @@ const server = http.createServer((req, res) => {
         const userDataJson = JSON.parse(parsedBody);
         const usernameForSearch = userDataJson.username;
         const passwordForSearch = userDataJson.password;
-        const isUserExist = searchUser(usernameForSearch, passwordForSearch);
+        const isUserExist = sFunc.searchUser(
+          usernameForSearch,
+          passwordForSearch
+        );
         obj.isUserExist = isUserExist;
+        isUserAuth = isUserExist;
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(obj));
       });
@@ -100,7 +99,7 @@ const server = http.createServer((req, res) => {
         console.error(error.message);
       }
     });
-  } else if (pathName === "/addStudent") {
+  } else if (pathName === "/templates/addStudent") {
     if (method === "POST") {
       const body = [];
       let obj = {};
@@ -109,22 +108,50 @@ const server = http.createServer((req, res) => {
         body.push(chunk);
       });
       req.on("end", () => {
+        let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+        let dataList = JSON.parse(data);
         const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
         const userDataJson = JSON.parse(parsedBody);
         const studentName = userDataJson.studentName;
         const studentLastName = userDataJson.studentLastName;
         const studentPhone = userDataJson.studentPhone;
-        const isAddSuccess = addStudent(
+        const isAddSuccess = sFunc.addStudent(
+          dataList,
           studentName,
           studentLastName,
           studentPhone
         );
-        obj.isUserExist = isUserExist;
+        // console.log(dataList);
+        dataList[0].isAddSuccess = true;
+        // dataList.push({ isAddSuccess: true });
+        // console.log(dataList);
+        // obj.isAddSuccess = isAddSuccess;
+        obj.isAddSuccess = true;
+        //dataList.push(dataList);
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(obj));
+        res.end(JSON.stringify(dataList));
+        //res.end(dataList);
       });
     }
   } else {
+    //let file = isUserAuth ? file1 : file2;
+
+    if (!isUserAuth) {
+      console.log("user not auth");
+      if (
+        reqpath === "/templates/class.html" ||
+        reqpath == "/templates/main.html"
+      ) {
+        reqpath = "/templates/index";
+        file = path.join(__dirname, reqpath);
+      }
+    } else {
+      //show main page if user auth
+      file = path.join(
+        __dirname,
+        reqpath.replace(/\/$/, "/templates/main.html")
+      );
+    }
     let s = fs.createReadStream(file);
     s.on("open", function () {
       res.setHeader("Content-Type", type);
@@ -139,35 +166,3 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(3000);
-
-function searchUser(username, password) {
-  let data = fs.readFileSync(__dirname + "/assets/data/users.json");
-  let dataList = JSON.parse(data);
-
-  var userAndPasswordPresent = false;
-  for (var i in dataList) {
-    if (
-      dataList[i].username === username &&
-      dataList[i].password === password
-    ) {
-      userAndPasswordPresent = true;
-    }
-  }
-  return userAndPasswordPresent;
-}
-
-function addStudent(studentName, studentLastName, studentPhone) {
-  let data = fs.readFileSync(__dirname + "/assets/data/users.json");
-  let dataList = JSON.parse(data);
-
-  var userAndPasswordPresent = false;
-  for (var i in dataList) {
-    if (
-      dataList[i].username === username &&
-      dataList[i].password === password
-    ) {
-      userAndPasswordPresent = true;
-    }
-  }
-  return userAndPasswordPresent;
-}

@@ -1,6 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+
 function createServer(text_data_arr) {
   const home = fs.readFileSync(`${__dirname}/templates/index.html`);
   const server = http.createServer((req, res) => {

@@ -23,6 +23,7 @@
 		} ).then( res => res.json() )
 		  .then( res => {
 			console.log( res );
+
 			const lis = res.map( el => {
 			  return `
 				<li><div class="student">${el.name}-${el.lastname}-${el.age}</div></li>
@@ -55,7 +56,7 @@
 		<form action="" method="post" class="d-flex jcsb f-wrap">
 			<input type="text" name="studentName" id="studentName" placeholder="Name:">
 			<input type="text" name="studentLastName" id="studentLastName" placeholder="Lastname:">
-			<input type="text" name="studentAge" id="studentPhone" placeholder="Age:">
+			<input type="text" name="studentAge" id="studentAge" placeholder="Age:">
 			<input type="submit" value="Add" id="addStudent">
 		</form>
 		<div class="response mt2"></div>
