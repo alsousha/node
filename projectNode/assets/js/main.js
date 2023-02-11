@@ -1,49 +1,12 @@
 "use strict";
 
 import * as check from "./check.js";
-const btn_form = document.getElementById("BtnForm");
+import * as fFunc from "./func.js";
 const btn_login = document.getElementById("BtnLogin");
 const add_student = document.getElementById("addStudent");
 
 let textResponse;
-if (btn_form != null) {
-  btn_form.addEventListener("click", (event) => {
-    event.preventDefault();
 
-    //get inputs
-    const name = document.querySelector("#userName");
-    const lastName = document.querySelector("#userLastName");
-    const phone = document.querySelector("#userPhone");
-
-    const dataUsers = {
-      name: name.value.trim(),
-      lastName: lastName.value.trim(),
-      phone: phone.value.trim(),
-    };
-    if (checkFormValue(dataUsers)) {
-      fetch("formReq", {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataUsers), //send data
-      })
-        .then(function (res) {
-          return res.json();
-        })
-        .then((res) => {
-          textResponse = "Your data saved!";
-          printResponse(".response", textResponse, "success");
-        })
-        .catch((err) => {
-          textResponse = "Your data failed! Try again later";
-          printResponse(".response", textResponse, "fail");
-          console.log(err);
-        });
-    }
-  });
-}
 if (btn_login != null) {
   btn_login.addEventListener("click", function (event) {
     event.preventDefault();
@@ -95,11 +58,12 @@ if (add_student != null) {
     const studentName = document.querySelector("#studentName");
     const studentLastName = document.querySelector("#studentLastName");
     const studentAge = document.querySelector("#studentAge");
+    
 
     const studentUser = {
       studentName: studentName.value.trim(),
       studentLastName: studentLastName.value.trim(),
-      studentPhone: studentAge.value.trim(),
+      studentAge: studentAge.value.trim(),
     };
     if (
       check.checkStudentValue(
@@ -121,18 +85,12 @@ if (add_student != null) {
           return res.json();
         })
         .then((res) => {
+          fFunc.fnAction;
           if (res[0].isAddSuccess) {
             textResponse = "Addeding success!";
             check.printResponse(".response", textResponse, "success");
-            const lis = res.map((el) => {
-              return `
-				  <li><div class="student">${el.name}-${el.lastname}-${el.age}</div></li>
-				`;
-            });
-
-            document.querySelector(".students__wrap").innerHTML = `
-			  <ol>${lis.join("")}</ol>
-			  `;
+            fFunc.showClass(res)
+            
           } else {
             textResponse = "Incorrect data of student! Try again!";
             check.printResponse(".response", textResponse, "fail");
@@ -145,4 +103,12 @@ if (add_student != null) {
         });
     }
   });
+}
+
+const sPath = window.location.pathname;
+const sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+//check what page loaded
+if(sPage == "class.html"){  
+	//call fucn ready() after loaded page
+  document.addEventListener("DOMContentLoaded", fFunc.ready)
 }

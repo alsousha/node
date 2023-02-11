@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 module.exports = {
   searchUser: function (username, password) {
     var userAndPasswordPresent = false;
@@ -22,8 +23,8 @@ module.exports = {
   },
 
   addStudent: function (dataList, studentName, studentLastName, studentAge) {
-    // let data = fs.readFileSync(__dirname + "/assets/data/students.json");
-    // let dataList = JSON.parse(data);
+    let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+    dataList = JSON.parse(data);
     dataList.push({
       name: studentName,
       lastname: studentLastName,
@@ -32,6 +33,8 @@ module.exports = {
     dataList = JSON.stringify(dataList);
     fs.writeFileSync(__dirname + "/assets/data/students.json", dataList);
 
+
+   
     let userAndPasswordPresent = true;
     return userAndPasswordPresent;
   },

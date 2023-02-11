@@ -7,6 +7,10 @@
     "start": "nodemon app.js",
     "other": "nodemon app.js"
   },
+  
+  "nodemonConfig": {
+    "ignore": ["**/data/**"]
+  },
   "author": "Bogdanov_Barak",
   "license": "ISC",
   "description": ""
