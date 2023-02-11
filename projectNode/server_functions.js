@@ -23,19 +23,22 @@ module.exports = {
   },
 
   addStudent: function (dataList, studentName, studentLastName, studentAge) {
-    let data = fs.readFileSync(__dirname + "/assets/data/students.json");
-    dataList = JSON.parse(data);
-    dataList.push({
-      name: studentName,
-      lastname: studentLastName,
-      age: studentAge,
-    });
-    dataList = JSON.stringify(dataList);
-    fs.writeFileSync(__dirname + "/assets/data/students.json", dataList);
-
-
-   
-    let userAndPasswordPresent = true;
-    return userAndPasswordPresent;
+    try {
+      let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+      dataList = JSON.parse(data);
+      dataList.push({
+        name: studentName,
+        lastname: studentLastName,
+        age: studentAge,
+      });
+      dataList = JSON.stringify(dataList);
+      fs.writeFileSync(__dirname + "/assets/data/students.json", dataList);
+      studentAddeded = true;
+    } catch (error) {
+      console.log("Some problem with read/write file");
+      dataList = null;
+    }
+    console.log("Afret sync");
+    return dataList;
   },
 };

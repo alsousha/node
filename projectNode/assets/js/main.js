@@ -58,7 +58,6 @@ if (add_student != null) {
     const studentName = document.querySelector("#studentName");
     const studentLastName = document.querySelector("#studentLastName");
     const studentAge = document.querySelector("#studentAge");
-    
 
     const studentUser = {
       studentName: studentName.value.trim(),
@@ -85,12 +84,11 @@ if (add_student != null) {
           return res.json();
         })
         .then((res) => {
-          fFunc.fnAction;
+          //console.log(res);
           if (res[0].isAddSuccess) {
             textResponse = "Addeding success!";
             check.printResponse(".response", textResponse, "success");
-            fFunc.showClass(res)
-            
+            fFunc.showClass(res);
           } else {
             textResponse = "Incorrect data of student! Try again!";
             check.printResponse(".response", textResponse, "fail");
@@ -106,9 +104,9 @@ if (add_student != null) {
 }
 
 const sPath = window.location.pathname;
-const sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+const sPage = sPath.substring(sPath.lastIndexOf("/") + 1);
 //check what page loaded
-if(sPage == "class.html"){  
-	//call fucn ready() after loaded page
-  document.addEventListener("DOMContentLoaded", fFunc.ready)
+if (sPage == "class.html") {
+  //call fucn ready() after loaded page
+  document.addEventListener("DOMContentLoaded", fFunc.ready);
 }

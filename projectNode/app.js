@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
   const pathUrl = url.parse(pathName, true);
   let reqpath = pathName.toString().split("?")[0];
   pathName = pathUrl.pathname;
-  console.log("pathname" + pathName)
+  //   console.log("pathname" + pathName);
 
   let file = path.join(
     __dirname,
@@ -35,102 +35,101 @@ const server = http.createServer((req, res) => {
   // form method
   const method = req.method;
 
-if (pathName === "/login") {
-  if (method === "POST") {
-    const body = [];
-    let obj = {};
-    req.on("data", (chunk) => {
-      body.push(chunk);
-    });
-    req.on("end", () => {
-      const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
-      const userDataJson = JSON.parse(parsedBody);
-      const usernameForSearch = userDataJson.username;
-      const passwordForSearch = userDataJson.password;
-      const isUserExist = sFunc.searchUser(
-        usernameForSearch,
-        passwordForSearch
-      );
-      obj.isUserExist = isUserExist;
-      isUserAuth = isUserExist;
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(obj));
-    });
-  }
-} else if (pathName === "/templates/students") {
-  let data = fs.readFileSync(__dirname + "/assets/data/students.json");
-  let dataList = JSON.parse(data);
-  const body = [];
-  req.on("data", (chunk) => {
-    body.push(chunk);
-  });
-  req.on("end", () => {
-    try {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(dataList));
-    } catch (error) {
-      console.error(error.message);
+  if (pathName === "/login") {
+    if (method === "POST") {
+      const body = [];
+      let obj = {};
+      req.on("data", (chunk) => {
+        body.push(chunk);
+      });
+      req.on("end", () => {
+        const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
+        const userDataJson = JSON.parse(parsedBody);
+        const usernameForSearch = userDataJson.username;
+        const passwordForSearch = userDataJson.password;
+        const isUserExist = sFunc.searchUser(
+          usernameForSearch,
+          passwordForSearch
+        );
+        obj.isUserExist = isUserExist;
+        isUserAuth = isUserExist;
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(obj));
+      });
     }
-  });
-} else if (pathName === "/templates/addStudent") {
-  if (method === "POST") {
-    
+  } else if (pathName === "/templates/students") {
+    let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+    let dataList = JSON.parse(data);
     const body = [];
-    let obj = {};
     req.on("data", (chunk) => {
       body.push(chunk);
     });
     req.on("end", () => {
-      //let dataList = {}
-      let data = fs.readFileSync(__dirname + "/assets/data/students.json");
-      let dataList = JSON.parse(data);
-      const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
-      const userDataJson = JSON.parse(parsedBody);
-      const studentName = userDataJson.studentName;
-      const studentLastName = userDataJson.studentLastName;
-      const studentAge = userDataJson.studentAge;
-      const isAddSuccess = sFunc.addStudent(
-        dataList,
-        studentName,
-        studentLastName,
-        studentAge
-      );
-      dataList[0].isAddSuccess = true;
-      obj.isAddSuccess = true;
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(dataList));
-      //res.end(dataList);
+      try {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(dataList));
+      } catch (error) {
+        console.error(error.message);
+      }
     });
-    console.log("RRR"+isUserAuth);
-  }
-} else {
-  if (!isUserAuth) {
-    console.log("user not auth");
-    if (
-      reqpath === "/templates/class.html" ||
-      reqpath == "/templates/main.html" 
-    ) {
-      reqpath = "/templates/index";
-      file = path.join(__dirname, reqpath);
+  } else if (pathName === "/templates/addStudent") {
+    if (method === "POST") {
+      const body = [];
+      req.on("data", (chunk) => {
+        body.push(chunk);
+      });
+      req.on("end", () => {
+        //let dataList = {}
+
+        let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+        let dataList = JSON.parse(data);
+        const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
+        const userDataJson = JSON.parse(parsedBody);
+        const studentName = userDataJson.studentName;
+        const studentLastName = userDataJson.studentLastName;
+        const studentAge = userDataJson.studentAge;
+        const dataListAfterAddeded = sFunc.addStudent(
+          dataList,
+          studentName,
+          studentLastName,
+          studentAge
+        );
+        let dataListAfterAddededObj = JSON.parse(dataListAfterAddeded);
+        dataListAfterAddededObj[0].isAddSuccess = dataListAfterAddeded !== null;
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(dataListAfterAddededObj));
+        //res.end(dataList);
+      });
+      //console.log("RRR" + isUserAuth);
     }
   } else {
-    //show main page if user auth
-    file = path.join(
-      __dirname,
-      reqpath.replace(/\/$/, "/templates/main.html")
-    );
+    if (!isUserAuth) {
+      console.log("user not auth");
+      if (
+        reqpath === "/templates/class.html" ||
+        reqpath == "/templates/main.html"
+      ) {
+        reqpath = "/templates/index";
+        file = path.join(__dirname, reqpath);
+      }
+    } else {
+      //show main page if user auth
+      file = path.join(
+        __dirname,
+        reqpath.replace(/\/$/, "/templates/main.html")
+      );
+    }
+    let s = fs.createReadStream(file);
+    s.on("open", function () {
+      res.setHeader("Content-Type", type);
+      s.pipe(res);
+    });
+    s.on("error", function () {
+      res.setHeader("Content-Type", "text/plain");
+      res.statusCode = 404;
+      res.end("Not found");
+    });
   }
-  let s = fs.createReadStream(file);
-  s.on("open", function () {
-    res.setHeader("Content-Type", type);
-    s.pipe(res);
-  });
-  s.on("error", function () {
-    res.setHeader("Content-Type", "text/plain");
-    res.statusCode = 404;
-    res.end("Not found");
-  });
-}
 });
 
 server.listen(3001);
