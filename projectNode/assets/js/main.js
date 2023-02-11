@@ -58,17 +58,18 @@ if (add_student != null) {
     const studentName = document.querySelector("#studentName");
     const studentLastName = document.querySelector("#studentLastName");
     const studentAge = document.querySelector("#studentAge");
-
     const studentUser = {
-      studentName: studentName.value.trim(),
-      studentLastName: studentLastName.value.trim(),
-      studentAge: studentAge.value.trim(),
+      studentName: studentName.value.trim().charAt(0).toUpperCase() + studentName.value.trim().slice(1),
+      studentLastName: studentLastName.value.trim().charAt(0).toUpperCase() + studentLastName.value.trim().slice(1),
+      studentAge: studentAge.value.trim().charAt(0).toUpperCase() + studentAge.value.trim().slice(1),
     };
     if (
       check.checkStudentValue(
-        studentUser.studentName,
+        textResponse, 
         studentUser.studentLastName,
-        studentUser.studentAge
+        studentUser.studentName,
+        studentUser.studentAge,
+        3, 100
       )
     ) {
       //send data to server
