@@ -57,21 +57,48 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(obj));
       });
     }
-  } else if (pathName === "/templates/students") {
-    let data = fs.readFileSync(__dirname + "/assets/data/students.json");
-    let dataList = JSON.parse(data);
-    const body = [];
-    req.on("data", (chunk) => {
-      body.push(chunk);
-    });
-    req.on("end", () => {
-      try {
+  } else if (pathName === "/templates/exit") {
+    if (method === "POST") {
+      const body = [];
+      let obj = {};
+      req.on("data", (chunk) => {
+        body.push(chunk);
+      });
+      req.on("end", () => {
+        const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
+        // const userDataJson = JSON.parse(parsedBody);
+        // const usernameForSearch = userDataJson.username;
+        // const passwordForSearch = userDataJson.password;
+        // const isUserExist = sFunc.searchUser(
+        //   usernameForSearch,
+        //   passwordForSearch
+        // );
+        // obj.isUserExist = isUserExist;
+        isUserAuth = false;
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(dataList));
-      } catch (error) {
-        console.error(error.message);
-      }
-    });
+        res.end(JSON.stringify(obj));
+      });
+    }
+  }else if (pathName === "/templates/students") {
+    let data
+    try{
+      data = fs.readFileSync(__dirname + "/assets/data/students.json");
+    }catch(error){
+      console.log("File not found or wrong file structure");
+    }
+    let dataList = JSON.parse(data);
+      const body = [];
+      req.on("data", (chunk) => {
+        body.push(chunk);
+      });
+      req.on("end", () => {
+        try {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(JSON.stringify(dataList));
+        } catch (error) {
+          console.error(error.message);
+        }
+      });
   } else if (pathName === "/templates/addStudent") {
     if (method === "POST") {
       const body = [];
@@ -79,9 +106,13 @@ const server = http.createServer((req, res) => {
         body.push(chunk);
       });
       req.on("end", () => {
-        //let dataList = {}
-
-        let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+        let data
+        try{
+          data = fs.readFileSync(__dirname + "/assets/data/students.json");
+        }catch(error){
+          console.log("File not found or wrong file structure");
+        }
+        
         let dataList = JSON.parse(data);
         const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
         const userDataJson = JSON.parse(parsedBody);
@@ -104,7 +135,7 @@ const server = http.createServer((req, res) => {
     }
   } else {
     if (!isUserAuth) {
-      console.log("user not auth");
+      //console.log("user not auth");
       if (
         reqpath === "/templates/class.html" ||
         reqpath == "/templates/main.html"

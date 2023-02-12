@@ -17,29 +17,45 @@
 	
 <body>
 	<header>
-		<div class="container header__wrap d-flex g2 pt3">
-			<a href="../templates/main.html">Home</a>
-			<a href="../templates/class.html">Class</a>
-		</div>
-	</header>
-	<h1 class="accent">Class</h1>
-
-	<div class="students">
-		<div class="container">
-			<div class="students__wrap d-flex jcsb f-wrap">
-				<div class="student"></div>
+		<div class="container header__wrap d-flex jcsb g2 pt3">
+			<div class="left">
+				<a href="/">Home</a>
+				<a href="../templates/class.html">Class</a>
+			</div>
+			<div class="right">
+				<a href="#" id="Exit">Exit</a>
 			</div>
 		</div>
+	</header>
+	<div class="main">
+		<h1 class="accent">Class</h1>
+
+		<div class="students">
+			<div class="container">
+				<div class="students__wrap d-flex jcsb f-wrap">
+					<div class="student"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container form__wrap">
+			<form action="" method="post" class="d-flex jcsb f-wrap">
+				<input type="text" name="studentLastName" id="studentLastName" placeholder="Lastname:">
+				<input type="text" name="studentName" id="studentName" placeholder="Name:">
+				<input type="text" name="studentAge" id="studentAge" placeholder="Age:">
+				<input type="submit" value="Add" id="addStudent">
+			</form>
+			<div class="response mt2"></div>
+		</div>
 	</div>
-	<div class="container form__wrap">
-		<form action="" method="post" class="d-flex jcsb f-wrap">
-			<input type="text" name="studentLastName" id="studentLastName" placeholder="Lastname:">
-			<input type="text" name="studentName" id="studentName" placeholder="Name:">
-			<input type="text" name="studentAge" id="studentAge" placeholder="Age:">
-			<input type="submit" value="Add" id="addStudent">
-		</form>
-		<div class="response mt2"></div>
-	</div>
+	
+
+	<footer>
+		<div class="container mt6 p2">
+			<div class="authors d-flex jcc">
+				<p>Bogdanova Alsu and Barak Tsach</p>
+			</div>
+		</div>
+	</footer>
 
 	
 </body>

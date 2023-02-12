@@ -19,7 +19,7 @@ export const showClass = function (obj) {
 
     const list = obj.slice(1).map((el) => {
         return `
-            <li><div class="student">${el.lastname}-${el.name}-${el.age}</div></li>
+            <li><div class="student">${el.lastname} ${el.name} ${el.age} years old</div></li>
             `;
     });
     document.querySelector(".students__wrap").innerHTML = `

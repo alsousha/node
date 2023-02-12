@@ -1,6 +1,5 @@
 export const checkLoginValue = function (textResponse, username, password) {
-  //add checks for login and password !!!
-  return checkInputsNotEmpty(textResponse, username, password);
+  return checkLength(textResponse, 2, username, "UserName") && checkLength(textResponse, 8, password, "Password") && checkValLettersAndNumbers(textResponse, password, "Password") && checkInputsNotEmpty(textResponse, username, password);
 };
 //func gets several inputs to check
 export const checkInputsNotEmpty = function (textResponse, ...values) {
@@ -13,12 +12,29 @@ export const checkInputsNotEmpty = function (textResponse, ...values) {
   }
   return true;
 };
-
 export const checkInt = function (textResponse, num, minVal, maxVal) {
   if (Number.isInteger(Number(num)) && /^\d+$/.test(num) && num>=minVal && num <= maxVal) {
     return true
   }else{
     textResponse = "Number value isn't correct";
+    printResponse(".response", textResponse, "fail");
+    return false;
+  } 
+};
+export const checkLength = function (textResponse, length, val, valName) {
+  if (val.length>=length) {
+    return true
+  }else{
+    textResponse = `${valName} must be minimum ${length} chars`;
+    printResponse(".response", textResponse, "fail");
+    return false;
+  } 
+};
+export const checkValLettersAndNumbers = function (textResponse, str, valName) {
+  if (/^\w+$/.test(str)) {
+    return true
+  }else{
+    textResponse = `${valName} must contain only digits and letters`;
     printResponse(".response", textResponse, "fail");
     return false;
   } 
@@ -32,8 +48,6 @@ export const checkStrLetterOnly = function (textResponse, ...values) {
     }
   }
   return true;
-
-
 };
 export const printResponse = function (parentElem, text, className) {
   document.querySelector(parentElem).innerHTML = `

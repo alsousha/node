@@ -4,7 +4,7 @@ import * as check from "./check.js";
 import * as fFunc from "./func.js";
 const btn_login = document.getElementById("BtnLogin");
 const add_student = document.getElementById("addStudent");
-
+const btn_exit = document.getElementById("Exit");
 let textResponse;
 
 if (btn_login != null) {
@@ -97,6 +97,9 @@ if (add_student != null) {
             textResponse = "Addeding success!";
             check.printResponse(".response", textResponse, "success");
             fFunc.showClass(res);
+            studentName.value = "";
+            studentLastName.value = "";
+            studentAge.value = "";
           } else {
             textResponse = "Incorrect data of student! Try again!";
             check.printResponse(".response", textResponse, "fail");
@@ -110,7 +113,28 @@ if (add_student != null) {
     }
   });
 }
-
+if(btn_exit !=null){
+  btn_exit.addEventListener("click", function(e){
+    e.preventDefault();
+    fetch("exit", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "",
+      },
+      body: JSON.stringify(), 
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .then((res) => {
+        window.location.href = "/"; //redirect to main page
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  })
+}
 const sPath = window.location.pathname;
 const sPage = sPath.substring(sPath.lastIndexOf("/") + 1);
 //check what page loaded
@@ -118,3 +142,4 @@ if (sPage == "class.html") {
   //call fucn ready() after loaded page
   document.addEventListener("DOMContentLoaded", fFunc.ready);
 }
+

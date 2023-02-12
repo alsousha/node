@@ -19,6 +19,11 @@ body {
 	line-height: 1.5;
 	height: 100vh;
 	background-color: aliceblue;
+	display: flex;
+    flex-direction: column;
+}
+.main{
+	flex-grow: 1;
 }
 
 /* #endregion: general */
@@ -91,6 +96,9 @@ a{
 .pt3{
 	padding-top: 3rem;
 }
+.p2{
+	padding: 2rem;
+}
 /* #endregion spaces*/
 .accent{
 	color: blueviolet;
@@ -125,4 +133,8 @@ a{
 }
 .fail{
 	color: red;
+}
+.students_wrap li{
+	border-bottom: 1px solid;
+	padding: 0.5rem 1rem;
 }

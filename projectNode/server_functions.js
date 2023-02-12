@@ -38,7 +38,6 @@ module.exports = {
       console.log("Some problem with read/write file");
       dataList = null;
     }
-    console.log("Afret sync");
     return dataList;
   },
 };
