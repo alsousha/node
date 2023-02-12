@@ -92,7 +92,7 @@ if (add_student != null) {
           return res.json();
         })
         .then((res) => {
-          //console.log(res);
+          console.log(res);
           if (res[0].isAddSuccess) {
             textResponse = "Addeding success!";
             check.printResponse(".response", textResponse, "success");
@@ -113,8 +113,8 @@ if (add_student != null) {
     }
   });
 }
-if(btn_exit !=null){
-  btn_exit.addEventListener("click", function(e){
+if (btn_exit != null) {
+  btn_exit.addEventListener("click", function (e) {
     e.preventDefault();
     fetch("exit", {
       method: "POST",
@@ -122,7 +122,7 @@ if(btn_exit !=null){
         Accept: "application/json, text/plain, */*",
         "Content-Type": "",
       },
-      body: JSON.stringify(), 
+      body: JSON.stringify(),
     })
       .then(function (res) {
         return res.json();
@@ -133,7 +133,7 @@ if(btn_exit !=null){
       .catch((err) => {
         console.log(err);
       });
-  })
+  });
 }
 const sPath = window.location.pathname;
 const sPage = sPath.substring(sPath.lastIndexOf("/") + 1);
@@ -142,4 +142,3 @@ if (sPage == "class.html") {
   //call fucn ready() after loaded page
   document.addEventListener("DOMContentLoaded", fFunc.ready);
 }
-

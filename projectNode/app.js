@@ -79,26 +79,26 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(obj));
       });
     }
-  }else if (pathName === "/templates/students") {
-    let data
-    try{
+  } else if (pathName === "/templates/students") {
+    let data;
+    try {
       data = fs.readFileSync(__dirname + "/assets/data/students.json");
-    }catch(error){
+    } catch (error) {
       console.log("File not found or wrong file structure");
     }
     let dataList = JSON.parse(data);
-      const body = [];
-      req.on("data", (chunk) => {
-        body.push(chunk);
-      });
-      req.on("end", () => {
-        try {
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify(dataList));
-        } catch (error) {
-          console.error(error.message);
-        }
-      });
+    const body = [];
+    req.on("data", (chunk) => {
+      body.push(chunk);
+    });
+    req.on("end", () => {
+      try {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(dataList));
+      } catch (error) {
+        console.error(error.message);
+      }
+    });
   } else if (pathName === "/templates/addStudent") {
     if (method === "POST") {
       const body = [];
@@ -106,13 +106,13 @@ const server = http.createServer((req, res) => {
         body.push(chunk);
       });
       req.on("end", () => {
-        let data
-        try{
+        let data;
+        try {
           data = fs.readFileSync(__dirname + "/assets/data/students.json");
-        }catch(error){
+        } catch (error) {
           console.log("File not found or wrong file structure");
         }
-        
+
         let dataList = JSON.parse(data);
         const parsedBody = Buffer.concat(body); //{"username":"%s","password":"%s"}
         const userDataJson = JSON.parse(parsedBody);
