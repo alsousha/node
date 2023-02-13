@@ -142,3 +142,21 @@ if (sPage == "class.html") {
   //call fucn ready() after loaded page
   document.addEventListener("DOMContentLoaded", fFunc.ready);
 }
+if (sPage == "main.html") {
+  fetch("gallery", {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      //'Content-Type': 'application/json'
+      "Content-Type": "",
+    },
+    body: JSON.stringify(),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      document.addEventListener(
+        "DOMContentLoaded",
+        fFunc.buildLibrary(res, ".gallery")
+      );
+    });
+}

@@ -1,28 +1,39 @@
 export const ready = function () {
-    fetch("students", {
-        method: "POST",
-        headers: {
-        Accept: "application/json, text/plain, */*",
-        //'Content-Type': 'application/json'
-        "Content-Type": "",
-        },
-        body: JSON.stringify(),
-    })
-        .then((res) => res.json())
-        .then((res) => {
-        showClass(res);
-        });
+  fetch("students", {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "",
+    },
+    body: JSON.stringify(),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      showClass(res);
+    });
 };
+export const showClass = function (obj) {
+  obj.sort((a, b) =>
+    a.lastname > b.lastname ? 1 : b.lastname > a.lastname ? -1 : 0
+  );
 
-export const showClass = function (obj) { 
-    obj.sort((a,b) => (a.lastname > b.lastname) ? 1 : ((b.lastname > a.lastname) ? -1 : 0));
-
-    const list = obj.slice(1).map((el) => {
-        return `
+  const list = obj.slice(1).map((el) => {
+    return `
             <li><div class="student">${el.lastname} ${el.name} ${el.age} years old</div></li>
             `;
-    });
-    document.querySelector(".students__wrap").innerHTML = `
+  });
+  document.querySelector(".students__wrap").innerHTML = `
             <ol>${list.join("")}</ol>
             `;
+};
+export const buildLibrary = function (data, parentElement) {
+  const gallery = document.querySelector(parentElement);
+
+  data.forEach((img) => {
+    const figure = document.createElement("figure");
+    figure.innerHTML = `
+  	   <img src=${img.url} alt=${img.alt}>
+  	  `;
+    gallery.append(figure);
+  });
 };

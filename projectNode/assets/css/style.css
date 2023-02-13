@@ -27,9 +27,7 @@ body {
 }
 
 /* #endregion: general */
-
 /* #region typography */
-
 h1,
 h2 {
 	font-weight: 800;
@@ -55,6 +53,7 @@ a{
 /* #region spaces*/
 .container{
 	max-width: 120rem;
+	width: 90%;
 	margin: 0 auto;
 }
 .d-flex{
@@ -100,6 +99,7 @@ a{
 	padding: 2rem;
 }
 /* #endregion spaces*/
+/* #region specific style*/
 .accent{
 	color: blueviolet;
 }
@@ -137,4 +137,22 @@ a{
 .students_wrap li{
 	border-bottom: 1px solid;
 	padding: 0.5rem 1rem;
+}
+.gallery{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 3rem;
+}
+.gallery img{
+	width: 16rem;
+}
+/* #endregion specific style*/
+@media (max-width: 700px){
+	.form__wrap input{
+		width: calc(100%/2 - 10px);
+	}
+	.gallery{
+		flex-wrap: wrap;
+	}
 }
