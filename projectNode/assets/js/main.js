@@ -5,6 +5,8 @@ import * as fFunc from "./func.js";
 const btn_login = document.getElementById("BtnLogin");
 const add_student = document.getElementById("addStudent");
 const btn_exit = document.getElementById("Exit");
+const studentsWrap = document.querySelector(".students__wrap");
+let activeStudentItem;
 let textResponse;
 
 if (btn_login != null) {
@@ -159,4 +161,17 @@ if (sPage == "main.html") {
         fFunc.buildLibrary(res, ".gallery")
       );
     });
+}
+if (studentsWrap != null) {
+  studentsWrap.addEventListener("click", function (event) {
+    //data of contact
+    activeStudentItem = fFunc.parentByClass(event.target, "student");
+    fFunc.removeActiveClass("student"); //remove active class of prev element
+    fFunc.addActiveClass(activeStudentItem); //current active element
+
+    // click by delete btn
+    if (event.target.classList.contains("btn_delete")) {
+      activeStudentItem.remove();
+    }
+  });
 }

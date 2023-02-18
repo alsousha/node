@@ -16,14 +16,20 @@ export const showClass = function (obj) {
   obj.sort((a, b) =>
     a.lastname > b.lastname ? 1 : b.lastname > a.lastname ? -1 : 0
   );
-
+  let i = 0;
+  let activeClass = "";
   const list = obj.slice(1).map((el) => {
+    activeClass = i == 0 ? "active" : "";
     return `
-            <li><div class="student">${el.lastname} ${el.name} ${el.age} years old</div></li>
+            <li class="student ${activeClass}" id="student_${++i}">${
+      el.lastname
+    } ${el.name} ${
+      el.age
+    } years old <button class="btn_delete" data-stud_id ="${i}">Delete</button></li>
             `;
   });
   document.querySelector(".students__wrap").innerHTML = `
-            <ol>${list.join("")}</ol>
+            <ol class="class_inner">${list.join("")}</ol>
             `;
 };
 export const buildLibrary = function (data, parentElement) {
@@ -36,4 +42,24 @@ export const buildLibrary = function (data, parentElement) {
   	  `;
     gallery.append(figure);
   });
+};
+//get parent by class
+export const parentByClass = function (item, className) {
+  var node = item;
+
+  while (node) {
+    if (node.classList.contains(className)) {
+      return node;
+    }
+    node = node.parentElement;
+  }
+  return null;
+};
+//toggle active element
+export const addActiveClass = function (elem) {
+  if (elem !== null) elem.classList.add("active");
+};
+export const removeActiveClass = function (elemClass) {
+  const elem = document.querySelector(`.${elemClass}.active`);
+  if (elem !== null) elem.classList.remove("active");
 };
