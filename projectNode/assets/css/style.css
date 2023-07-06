@@ -2,157 +2,179 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-	font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-	font-size: 2rem;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-	line-height: 1.5;
-	height: 100vh;
-	background-color: aliceblue;
-	display: flex;
-    flex-direction: column;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  height: 100vh;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
 }
-.main{
-	flex-grow: 1;
+.main {
+  flex-grow: 1;
 }
 
 /* #endregion: general */
 /* #region typography */
 h1,
 h2 {
-	font-weight: 800;
-	font-size: 3.2rem;
-	font-family: 'Goblin One', cursive;
+  font-weight: 800;
+  font-size: 3.2rem;
+  font-family: 'Goblin One', cursive;
 }
 
 h1 {
-	
-	font-size: 4.5rem;
-	text-transform: uppercase;
-	text-align: center;
-	margin: 0; /* normalize defines margin on h1 */
+  font-size: 4.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0; /* normalize defines margin on h1 */
 }
-li{
-	list-style: none;
+li {
+  list-style: none;
 }
-a{
-	text-decoration: none;
-	color: #000;
+a {
+  text-decoration: none;
+  color: #000;
 }
 /* #endregion typography */
 /* #region spaces*/
-.container{
-	max-width: 120rem;
-	width: 90%;
-	margin: 0 auto;
+.container {
+  max-width: 120rem;
+  width: 90%;
+  margin: 0 auto;
 }
-.d-flex{
-	display: flex;
+.d-flex {
+  display: flex;
 }
-.jcsb{
-	justify-content: space-between;
+.jcsb {
+  justify-content: space-between;
 }
-.jcc{
-	justify-content: center;
+.jcc {
+  justify-content: center;
 }
-.aic{
-	align-items: center;
+.aic {
+  align-items: center;
 }
-.f-column{
-	flex-direction: column;
+.f-column {
+  flex-direction: column;
 }
-.f-wrap{
-	flex-wrap: wrap;
+.f-wrap {
+  flex-wrap: wrap;
 }
-.g2{
-	gap: 2rem;
+.g2 {
+  gap: 2rem;
 }
-.h40{
-	height: 40rem;
+.h40 {
+  height: 40rem;
 }
-.w_50{
-	width: calc(100%/2 - 10px);
+.w_50 {
+  width: calc(100% / 2 - 10px);
 }
-.mt2{
-	margin-top: 2rem;
+.mt2 {
+  margin-top: 2rem;
 }
-.mt6{
-	margin-top: 6rem;
+.mt6 {
+  margin-top: 6rem;
 }
-.mb5{
-	margin-bottom: 5rem;
+.mb5 {
+  margin-bottom: 5rem;
 }
-.pt3{
-	padding-top: 3rem;
+.pt3 {
+  padding-top: 3rem;
 }
-.p2{
-	padding: 2rem;
+.p2 {
+  padding: 2rem;
 }
 /* #endregion spaces*/
 /* #region specific style*/
-.accent{
-	color: blueviolet;
+.accent {
+  color: blueviolet;
 }
-.header__wrap a{
-	padding: 1rem;
-	border: 1px solid blueviolet;
+.header__wrap a {
+  padding: 1rem;
+  border: 1px solid blueviolet;
 }
-.header__wrap a:hover{
-	background-color: blueviolet;
-	transition: all .3s;
+.header__wrap a:hover {
+  background-color: blueviolet;
+  transition: all 0.3s;
 }
-.form__wrap input{
-	width: calc(100%/4 - 10px);
-    border: 1px blueviolet;
-    margin-top: 1rem;
-	padding: 1rem;
-    font-size: 2rem;
-    border-radius: 1rem
+.form__wrap input {
+  width: calc(100% / 4 - 10px);
+  border: 1px blueviolet;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 1rem;
 }
-.form__wrap input[type="submit"] {
-	background-color: blueviolet;
-	cursor: pointer;
+.form__wrap input[type='submit'] {
+  background-color: blueviolet;
+  cursor: pointer;
 }
-.form__wrap input[type="submit"]:hover{
-	background-color: transparent;
-	border: 1px solid blueviolet;
-	transition: all .3s;
+.form__wrap input[type='submit']:hover {
+  background-color: transparent;
+  border: 1px solid blueviolet;
+  transition: all 0.3s;
 }
-.success{
-	color: green;
+.success {
+  color: green;
 }
-.fail{
-	color: red;
+.fail {
+  color: red;
 }
-.students_wrap li{
-	border-bottom: 1px solid;
-	padding: 0.5rem 1rem;
+.students_wrap li {
+  border-bottom: 1px solid;
+  padding: 0.5rem 1rem;
 }
-.gallery{
-	display: flex;
-	justify-content: center;
-	gap: 1rem;
-	margin-top: 3rem;
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
 }
-.gallery img{
-	width: 16rem;
+.gallery img {
+  width: 16rem;
+}
+.info {
+  width: 20%;
+}
+.w100 {
+  width: 100%;
+}
+.list li {
+  text-align: center;
+}
+.mb2 {
+  margin-bottom: 2rem;
+}
+.bstyle {
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: 1px solid blueviolet;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+.bstyle:hover {
+  background-color: blueviolet;
+  transition: all 0.5s;
 }
 /* #endregion specific style*/
-@media (max-width: 700px){
-	.form__wrap input{
-		width: calc(100%/2 - 10px);
-	}
-	.gallery{
-		flex-wrap: wrap;
-	}
+@media (max-width: 700px) {
+  .form__wrap input {
+    width: calc(100% / 2 - 10px);
+  }
+  .gallery {
+    flex-wrap: wrap;
+  }
 }

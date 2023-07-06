@@ -40,4 +40,58 @@ module.exports = {
     }
     return dataList;
   },
+  delStudent: function (studentLastName) {
+    let dataList = {};
+    try {
+      let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+      dataList = JSON.parse(data);
+
+      let dataListAfterDelete = [];
+      for (let i in dataList) {
+        if (dataList[i].lastname != studentLastName) {
+          dataListAfterDelete.push(dataList[i]);
+          dataList[0].isSuccess = true;
+        }
+      }
+      //   console.log("delete");
+      //   console.log(dataListAfterDelete);
+      dataList = JSON.stringify(dataListAfterDelete);
+      fs.writeFileSync(__dirname + "/assets/data/students.json", dataList);
+    } catch (error) {
+      console.log("Some problem with read/write file");
+      dataList = null;
+    }
+    return dataList;
+  },
+  editStudent: function (
+    dataList,
+    originalDataStudent,
+    studentName,
+    studentLastName,
+    studentAge
+  ) {
+    // let dataList = {};
+    try {
+      let data = fs.readFileSync(__dirname + "/assets/data/students.json");
+      //dataList = JSON.parse(data);
+      for (let i in dataList) {
+        if (
+          dataList[i].lastname === originalDataStudent.lastname &&
+          dataList[i].name === originalDataStudent.name &&
+          dataList[i].age === originalDataStudent.age
+        ) {
+          (dataList[i].lastname = studentLastName),
+            (dataList[i].name = studentName),
+            (dataList[i].age = studentAge);
+        }
+      }
+      //   console.log("after edit");
+      //   console.log(dataList);
+      dataList = JSON.stringify(dataList);
+      fs.writeFileSync(__dirname + "/assets/data/students.json", dataList);
+    } catch (error) {
+      console.log("Some problem with read/write file");
+    }
+    return dataList;
+  },
 };
